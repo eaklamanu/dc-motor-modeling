@@ -1,0 +1,46 @@
+# =============================
+# Octave / Matlab .gitignore
+# =============================
+
+# Autosave and backup files
+*.asv
+*.autosave
+*.bak
+*~
+
+# Compiled MEX binaries
+*.mex*
+*.oct
+
+# Log and crash files
+*.log
+*.out
+*.err
+
+# Checkpoint/lock files
+*.lock
+*.checkpoint
+
+# Octave history file
+.octave_hist
+
+# MATLAB session/desktop state
+matlab_crash_dump.*
+*.mlhistory
+*.matlab
+
+# Figures and plots (optional: keep if generated automatically)
+*.fig
+*.png
+*.jpg
+*.jpeg
+
+# Data files (optional: keep only if not source data)
+*.mat
+*.csv
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
