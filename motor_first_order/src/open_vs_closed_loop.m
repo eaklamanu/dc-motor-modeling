@@ -75,7 +75,7 @@ text(tc_closed,0.632 * y_closed(end)+ 0.01, sprintf("\\tau = %.2f s (Closed)", t
 
 % --- Save plots ---
 %print('-dpng', '../results/impulse_response.png');
-print("../results/impulse_response.png", "-dpng");
+print("../results/open_vs_closed.png", "-dpng");
 
 
 % --- Notes ---
