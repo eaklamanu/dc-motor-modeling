@@ -26,6 +26,7 @@
 
 clear; clc; close all;
 pkg load control;
+addpath("/functions");
 
 % --- Parameters (example values, replace with your own) ---
 K = 10;      % system gain
@@ -35,12 +36,12 @@ tau = 0.5;   % time constant (s)
 s = tf('s');
 G = K / (tau*s + 1);
 
-% 2. Closed Loop Transfer Function
+% Closed Loop Transfer Function
 H = feedback(G, 1) ; %negative feedback with feedback path gain of 1
 disp("Closed Loop Transfer Function: ");
 H
 
-% 3. Step Response Comparison
+% Step Response Comparison
 figure;
 [y_open, t_open] = step(G);
 [y_closed, t_closed] = step(H);
@@ -78,6 +79,37 @@ text(tc_closed,0.632 * y_closed(end)+ 0.01, sprintf("\\tau = %.2f s (Closed)", t
 print("../results/open_vs_closed.png", "-dpng");
 
 
+ %Getting Step Info
+ info_open = stepinfo(G);
+ info_closed = stepinfo(H);
+ disp("Display Step Info for G");
+ info_open
+
+ disp("Display Step Info for H");
+ info_closed
+
+ results = {
+  "System", "RiseTime", "SettlingTime", "PeakTime", "Overshoot", ...
+  "SteadyStateError", "SteadyStateValue" ;
+  "Open Loop", info_open.RiseTime, info_open.SettlingTime,info_open.PeakTime, ...
+  info_open.Overshoot, info_open.SteadyStateError, info_open.SteadyStateValue ;
+  "Closed Loop", info_closed.RiseTime, info_closed.SettlingTime, info_closed.PeakTime, ...
+  info_closed.Overshoot, info_closed.SteadyStateError, info_closed.SteadyStateValue
+};
+
+fid = fopen("../results/open_vs_closed_loop.csv", "w");
+fprintf(fid, "System,RiseTime,SettlingTime, PeakTime, Overshoot,SteadyStateError\n");
+fprintf(fid, "Open Loop,%f,%f,%f,%f,%f\n", info_open.RiseTime, info_open.SettlingTime,info_open.PeakTime, ...
+  info_open.Overshoot, info_open.SteadyStateError);
+fprintf(fid, "Closed Loop,%f,%f,%f,%f,%f\n", info_closed.RiseTime, info_closed.SettlingTime, info_closed.PeakTime, ...
+  info_closed.Overshoot, info_closed.SteadyStateError);
+fclose(fid);
+
+
+
+
+
+
 % --- Notes ---
 % Closed-loop system reaches steady-state faster
-
+% Compare system parameters for open and closed loop systems
