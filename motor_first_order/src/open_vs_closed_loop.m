@@ -109,7 +109,6 @@ fclose(fid);
 
 
 
-
 % --- Notes ---
 % Closed-loop system reaches steady-state faster
 % Compare system parameters for open and closed loop systems
