@@ -49,11 +49,6 @@ grid on;
 drawnow;
 
 
-% --- Save plots ---
-%print('-dpng', '../results/impulse_response.png');
-print("../results/open_vs_closed.png", "-dpng");
-
-
  %Getting Step Info
  info_T_P_low = stepinfo(T_P_low);
  info_T_P_high = stepinfo(T_P_high);
@@ -61,9 +56,9 @@ print("../results/open_vs_closed.png", "-dpng");
  results = {
   "System", "RiseTime", "SettlingTime", "PeakTime", "Overshoot", ...
   "SteadyStateError" ;
-  "Open Loop", info_T_P_low.RiseTime, info_T_P_low.SettlingTime,info_T_P_low.PeakTime, ...
+  "Low Gain", info_T_P_low.RiseTime, info_T_P_low.SettlingTime,info_T_P_low.PeakTime, ...
   info_T_P_low.Overshoot, info_T_P_low.SteadyStateError ;
-  "Closed Loop", info_T_P_high.RiseTime, info_T_P_high.SettlingTime, info_T_P_high.PeakTime, ...
+  "High Gain", info_T_P_high.RiseTime, info_T_P_high.SettlingTime, info_T_P_high.PeakTime, ...
   info_T_P_high.Overshoot, info_T_P_high.SteadyStateError
 };
 
