@@ -1,9 +1,6 @@
 % =========================================================================
-% motor_first_order.m
-%
 % Modeling a DC motor as a first-order system in Octave.
 % =========================================================================
-%
 % Description:
 %   This script models a DC motor using a first-order transfer function:
 %
@@ -15,7 +12,7 @@
 %       K    = system gain (rad/s per V)
 %       τ    = time constant (s)
 %
-%   The script simulates the open-loop step response.
+%   The script simulates the open-loop impulse response.
 %   The time constant is also clearly marked on the script for easy analysis.
 %
 % Dependencies:

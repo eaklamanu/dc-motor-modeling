@@ -18,8 +18,6 @@ tau = 0.5;
 
 s = tf('s');
 G  = K/(tau*s + 1) ;
-disp("Open Loop Transfer Function: ");
-G
 
 % 2. Plotting the pzmap
 figure;
