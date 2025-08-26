@@ -145,7 +145,7 @@ fclose(fid);
 
 % Save bode and pole-zero map for documentation
 figure; bode(G); grid on; title("Plant Bode");
-print(fullfile(outdir, "bode_plant.png"), "-dpng");
+print(fullfile(outdir, "bode_plant_tuning.png"), "-dpng");
 
 figure; pzmap(G); grid on; title("Plant pzmap");
 print(fullfile(outdir, "pzmap_plant.png"), "-dpng");
