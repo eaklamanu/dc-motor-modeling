@@ -1,26 +1,28 @@
 % =========================================================================
-%   The script shows some system parameters for a first order control system.
+%   The script shows some system parameters for a second order control system.
 % Dependencies:
 %   GNU Octave + Control Package
 %   (install using: pkg install -forge control)
-%
 % =========================================================================
-
 clc;  clear;
-
 pkg load control;
 
-% First-order system example
-K = 10;
-tau = 0.5;
-s = tf('s');
-G = K / (tau*s + 1);
+% --- Motor parameters (example values; replace with your data) ---
+R  = 1.0;      % Armature resistance (Ohm)
+L  = 0.5e-3;   % Armature inductance (H)
+Kt = 0.05;     % Torque constant (N·m/A)
+Ke = 0.05;     % Back-EMF constant (V·s/rad)
+J  = 2.0e-4;   % Rotor inertia (kg·m^2)
+B  = 1.0e-4;   % Viscous friction (N·m·s/rad)
 
-% Closed-loop Transfer Function
-H = feedback(G,1);
+% --- Transfer function: speed (rad/s) per input voltage (V) ---
+num = [Kt];
+den = conv([J, B], [L, R]) + [0, 0, Kt*Ke];  % (Js+B)(Ls+R) + Kt*Ke
+G = tf(num, den);    % Plant
+H = feedback(G,1)
 
-% Step response
-[y, t_out] = step(H);
+% Step Response
+[y,t_out] = step(H);
 
 % --- Steady-state value ---
 tail_n = max(5, ceil(0.1 * length(y)));
@@ -79,5 +81,5 @@ disp(['Percentage Overshoot: ' num2str(perc_overshoot) ' %']);
 
 
 % --- Save plot ---
-outdir = "/home/rain/Documents/control_projects/dc_motor_modeling/motor_first_order/results" ;
+outdir = "/home/rain/Documents/control_projects/dc_motor_modeling/motor_second_order/results" ;
 print(fullfile(outdir, "sys_params.png"), "-dpng");
