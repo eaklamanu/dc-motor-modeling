@@ -1,5 +1,5 @@
 % =========================================================================
-% Modeling a DC motor as a first-order system in Octave.
+% Modeling a DC motor as a second-order system in Octave.
 % =========================================================================
 % Dependencies:
 %   GNU Octave + Control Package
